@@ -24,5 +24,9 @@ a, button {
 }
 
 .text-opacity {
-  opacity: .5;
+  color: #03071e7c;
+}
+
+.text-gray {
+  color: #A0A0A0;
 }
