@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   def new
-    session[:current_time] = Time.now
     @user = User.new
   end
 
