@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
 
-  before_save :downcase_nickname
+  before_validation :downcase_nickname
 
   validates :nickname, presence: true, uniqueness: true,
     length: { maximum: 40 }, format: { with: /\A\w+\z/ }
