@@ -14,3 +14,10 @@
   box-sizing: border-box;
   width: 100%;
 }
+
+.color-picker {
+  background-color: transparent;
+  border: none;
+  height: 50px;
+  width: 50px;
+}

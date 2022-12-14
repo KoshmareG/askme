@@ -11,8 +11,6 @@ module ApplicationHelper
   end
 
   def header_color(user)
-    color = user&.header_color.present? ? user.header_color : '#370617'
-
-    " style=\"background-color: #{color};\""
+    user&.header_color.present? ? user.header_color : User::DEFAULT_HEADER_COLOR
   end
 end
