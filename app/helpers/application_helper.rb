@@ -9,4 +9,10 @@ module ApplicationHelper
       many
     end
   end
+
+  def header_color(user)
+    color = user&.header_color.present? ? user.header_color : '#370617'
+
+    " style=\"background-color: #{color};\""
+  end
 end
