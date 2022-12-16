@@ -9,4 +9,8 @@ module ApplicationHelper
       many
     end
   end
+
+  def header_color(user)
+    user&.header_color.present? ? user.header_color : User::DEFAULT_HEADER_COLOR
+  end
 end
