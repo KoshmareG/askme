@@ -35,6 +35,10 @@ a, button {
   color: #D00000;
 }
 
+.text-dark-red {
+  color: #9D0208;
+}
+
 .text-bold {
   font-weight: bold;
 }
