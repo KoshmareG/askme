@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: %i[show edit update destroy hide]
+  before_action :ensure_current_user, only: %i[edit update destroy hide]
+  before_action :set_question_for_current_user, only: %i[edit update destroy hide]
 
   def index
     @questions = Question.all
@@ -7,17 +8,21 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    @question = Question.find(params[:id])
   end
 
   def new
-    @question = Question.new
+    @user = User.find(params[:user_id])
+    @question = Question.new(user: @user)
   end
 
   def create
-    @question = Question.new(questions_params)
+    question_params = params.require(:question).permit(:body, :user_id)
+
+    @question = Question.new(question_params)
 
     if @question.save
-      redirect_to question_path(@question), notice: 'Вопрос создан!'
+      redirect_to user_path(@question.user), notice: 'Вопрос создан!'
     else
       flash.now[:alert] = 'Вопрос задан неправильно'
 
@@ -29,8 +34,10 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if @question.update(questions_params)
-      redirect_to question_path(@question), notice: 'Вопрос изменен'
+    question_params = params.require(:question).permit(:body, :answer)
+
+    if @question.update(question_params)
+      redirect_to user_path(@question.user), notice: 'Вопрос изменен'
     else
       flash.now[:alert] = 'Вопрос задан неправильно'
 
@@ -39,9 +46,10 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
+    @user = @question.user
     @question.destroy
 
-    redirect_to questions_path, notice: 'Вопрос удален'
+    redirect_to user_path(@user), notice: 'Вопрос удален'
   end
 
   def hide
@@ -52,11 +60,11 @@ class QuestionsController < ApplicationController
 
   private
 
-  def questions_params
-    params.require(:question).permit(:body, :user_id)
+  def ensure_current_user
+    redirect_with_alert unless current_user.present?
   end
 
-  def set_question
-    @question = Question.find(params[:id])
+  def set_question_for_current_user
+    @question = current_user.questions.find(params[:id])
   end
 end
