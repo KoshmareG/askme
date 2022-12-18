@@ -1,0 +1,7 @@
+<div class="mt-sm container text-center">
+  <div class="fa-4x mb">
+    <%= fa_icon('question-circle-o') %>
+  </div>
+  <p class="mb">Вопросов пока нет, но Ваш может</p>
+  <%= link_to 'стать первым', new_question_path(user_id: @user), class: 'button button-yellow' %>
+</div>
