@@ -2,6 +2,10 @@
   <div class="fa-4x mb">
     <%= fa_icon('question-circle-o') %>
   </div>
-  <p class="mb">Вопросов пока нет, но Ваш может</p>
-  <%= link_to 'стать первым', new_question_path(user_id: @user), class: 'button button-yellow' %>
+  <p class="mb">Вопросов пока нет</p>
+  <% if current_user.present? %>
+    <p>но Ваш может <%= link_to 'стать первым', new_question_path(user_id: @user) %></p>
+  <% else %>
+    <%= render 'not_authorized' %>
+  <% end %>
 </div>

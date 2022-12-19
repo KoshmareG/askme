@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :ensure_current_user, only: %i[edit update destroy hide]
+  before_action :ensure_current_user, only: %i[new create edit update destroy hide]
   before_action :set_question_for_current_user, only: %i[edit update destroy hide]
 
   def index
@@ -20,6 +20,7 @@ class QuestionsController < ApplicationController
     question_params = params.require(:question).permit(:body, :user_id)
 
     @question = Question.new(question_params)
+    @question.author = current_user
 
     if @question.save
       redirect_to user_path(@question.user), notice: 'Вопрос создан!'

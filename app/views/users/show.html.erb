@@ -8,12 +8,16 @@
   <p class="text-bold mt mb-lg"><%= at_nickname(@user) %></p>
 </div>
 <% if @questions.any? %>
-  <div class="container">
-    <%= link_to 'Спроси меня', new_question_path(user_id: @user), class: 'button button-yellow' %>
-    <p class="mt">
-      <%= render 'questions/form', question: @question %>
-    </p>
-  </div>
+  <% if current_user.present? %>
+    <div class="container">
+      <%= link_to 'Спроси меня', new_question_path(user_id: @user), class: 'button button-yellow' %>
+      <p class="mt">
+        <%= render 'questions/form', question: @question %>
+      </p>
+    </div>
+  <% else %>
+    <%= render 'not_authorized' %>
+  <% end %>
   <div class="container">
     <h2 class="title-lg">
       <%= @questions.count %>
