@@ -3,9 +3,5 @@
     <%= fa_icon('question-circle-o') %>
   </div>
   <p class="mb">Вопросов пока нет</p>
-  <% if current_user.present? %>
-    <p>но Ваш может <%= link_to 'стать первым', new_question_path(user_id: @user) %></p>
-  <% else %>
-    <%= render 'not_authorized' %>
-  <% end %>
+  <p>но Ваш может <%= link_to 'стать первым', new_question_path(user_id: @user) %></p>
 </div>

@@ -1,5 +1,9 @@
 <div class="text-sm mb-sm">
-  <p><%= link_to at_nickname(question.author), user_path(question.author) %> спросил(а) у <%= link_to at_nickname(question.user), user_path(question.user) %></p>
+  <p><%= link_to 'Вопрос', question_path(question) %>
+    для <%= link_to at_nickname(question.user), user_path(question.user) %>
+    <% if question.author.present? %>
+      от <%= link_to at_nickname(question.author), user_path(question.author) %>
+    <% end %></p>
 </div>
 <div class="mb-sm">
   <%= simple_format h(question.body) %>
