@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :ensure_current_user, only: %i[new create edit update destroy hide]
+  before_action :ensure_current_user, only: %i[edit update destroy hide]
   before_action :set_question_for_current_user, only: %i[edit update destroy hide]
 
   def index

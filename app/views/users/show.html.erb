@@ -1,5 +1,8 @@
 <div class="user-box">
   <h2 class="title-lg mt-lg"><%= @user.name %></h2>
+  <div class="mt">
+    <%= render partial: 'users/user_avatar', locals: {user: @user} %>
+  </div>
   <% if current_user == @user %>
     <p class="mt mb-lg">
       <%= link_to fa_icon('pencil'), edit_user_path(@user) %>
@@ -8,16 +11,12 @@
   <p class="text-bold mt mb-lg"><%= at_nickname(@user) %></p>
 </div>
 <% if @questions.any? %>
-  <% if current_user.present? %>
-    <div class="container">
-      <%= link_to 'Спроси меня', new_question_path(user_id: @user), class: 'button button-yellow' %>
-      <p class="mt">
-        <%= render 'questions/form', question: @question %>
-      </p>
-    </div>
-  <% else %>
-    <%= render 'not_authorized' %>
-  <% end %>
+  <div class="container">
+    <%= link_to 'Спроси меня', new_question_path(user_id: @user), class: 'button button-yellow' %>
+    <p class="mt">
+      <%= render 'questions/form', question: @question %>
+    </p>
+  </div>
   <div class="container">
     <h2 class="title-lg">
       <%= @questions.count %>
