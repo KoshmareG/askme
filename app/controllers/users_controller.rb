@@ -29,7 +29,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find_by_nickname(params[:user][:nickname])
+    @user = User.find_by!(nickname: params[:user][:nickname])
 
     authorise_user
 
@@ -58,7 +58,7 @@ class UsersController < ApplicationController
   end
 
   def set_user
-    @user = User.find_by_nickname(params[:nickname])
+    @user = User.find_by!(nickname: params[:nickname])
   end
 
   def authorise_user
