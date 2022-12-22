@@ -17,7 +17,7 @@
       <% elsif flash[:alert].present? %>
         <p class="mb mt message message-alert"><%= flash[:alert] %></p>
       <% end %>
-      <div class="navbar" style="background-color: <%= header_color(current_user) %>;">
+      <div class="navbar" style="background-color: <%= header_color %>;">
         <p class="title-sm text-bold"><%= link_to 'AskMe', root_path %></p>
         <div>
           <% if current_user.present? %>
