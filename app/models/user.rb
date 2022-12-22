@@ -1,6 +1,5 @@
 class User < ApplicationRecord
   COLOR_REGEXP_RULE = /\A#[[:xdigit:]]{6}\z/
-  DEFAULT_HEADER_COLOR = '#370617'
   NICKNAME_REGEXP_RULE = /\A\w+\z/
 
   has_secure_password
@@ -15,15 +14,13 @@ class User < ApplicationRecord
     format: { with: COLOR_REGEXP_RULE }
 
   before_validation :downcase_nickname
-  before_validation :default_header_color
+
+  include Gravtastic
+  gravtastic(secure: true, filetype: :png, size: 100, default: 'retro')
 
   private
 
   def downcase_nickname
     nickname&.downcase!
-  end
-
-  def default_header_color
-    self.header_color ||= DEFAULT_HEADER_COLOR
   end
 end

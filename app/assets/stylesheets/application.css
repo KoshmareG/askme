@@ -8,5 +8,7 @@
  *= require form
  *= require question
  *= require message
+ *= require utils
  *= require user
+ *= require users
  */

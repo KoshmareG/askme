@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show edit update destroy]
-  before_action :authorise_user, only: %i[edit update destroy]
+  before_action :set_user, only: %i[show edit destroy]
+  before_action :authorise_user, only: %i[edit destroy]
 
   def new
     @user = User.new
@@ -29,6 +29,10 @@ class UsersController < ApplicationController
   end
 
   def update
+    @user = User.find_by_nickname(params[:user][:nickname])
+
+    authorise_user
+
     if @user.update(user_params)
       redirect_to root_path, notice: 'Ваши данные обновлены'
     else
@@ -54,7 +58,7 @@ class UsersController < ApplicationController
   end
 
   def set_user
-    @user = User.find(params[:id])
+    @user = User.find_by_nickname(params[:nickname])
   end
 
   def authorise_user

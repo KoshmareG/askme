@@ -3,7 +3,8 @@ class QuestionsController < ApplicationController
   before_action :set_question_for_current_user, only: %i[edit update destroy hide]
 
   def index
-    @questions = Question.all
+    @questions = Question.order(created_at: :desc).last(10)
+    @users = User.order(created_at: :desc).last(10)
   end
 
   def show
@@ -11,7 +12,7 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @user = User.find(params[:user_id])
+    @user = User.find_by_nickname(params[:nickname])
     @question = Question.new(user: @user)
   end
 
@@ -22,7 +23,7 @@ class QuestionsController < ApplicationController
     @question.author = current_user
 
     if @question.save
-      redirect_to user_path(@question.user), notice: 'Вопрос создан!'
+      redirect_to user_path(@question.user.nickname), notice: 'Вопрос создан!'
     else
       flash.now[:alert] = 'Вопрос задан неправильно'
 
@@ -37,7 +38,7 @@ class QuestionsController < ApplicationController
     question_params = params.require(:question).permit(:body, :answer)
 
     if @question.update(question_params)
-      redirect_to user_path(@question.user), notice: 'Вопрос изменен'
+      redirect_to user_path(@question.user.nickname), notice: 'Вопрос изменен'
     else
       flash.now[:alert] = 'Вопрос задан неправильно'
 
@@ -49,7 +50,7 @@ class QuestionsController < ApplicationController
     @user = @question.user
     @question.destroy
 
-    redirect_to user_path(@user), notice: 'Вопрос удален'
+    redirect_to user_path(@user.nickname), notice: 'Вопрос удален'
   end
 
   def hide
