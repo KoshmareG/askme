@@ -13,6 +13,11 @@
     <%= question.answer %>
   </div>
 <% end %>
+<% if question.hash_tags.present? %>
+  <p class="text-sm mb-sm">
+    <%= render question.hash_tags %>
+  </p>
+<% end %>
 <div class="text-sm question-footer">
   <div class="text-gray">
     <%= l(question.created_at, format: :short) %>
