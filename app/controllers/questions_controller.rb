@@ -3,8 +3,8 @@ class QuestionsController < ApplicationController
   before_action :set_question_for_current_user, only: %i[edit update destroy hide]
 
   def index
-    @questions = Question.order(created_at: :desc).last(10)
-    @users = User.order(created_at: :desc).last(10)
+    @questions = Question.order(created_at: :desc).first(10)
+    @users = User.order(created_at: :desc).first(10)
   end
 
   def show
