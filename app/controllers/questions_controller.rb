@@ -25,6 +25,8 @@ class QuestionsController < ApplicationController
     if @question.save
       redirect_to user_path(@question.user.nickname), notice: 'Вопрос создан!'
     else
+      @user = User.find(question_params[:user_id])
+
       flash.now[:alert] = 'Вопрос задан неправильно'
 
       render :new
