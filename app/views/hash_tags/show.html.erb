@@ -1,0 +1,11 @@
+<div class="container">
+  <h2 class="title-lg">
+    <%= @questions.count %>
+    <%= inclination(@questions.count, 'вопрос', 'вопроса', 'вопросов') %>
+  </h2>
+</div>
+<% @questions.each do |question| %>
+  <div class="mt-sm container<%= ' text-opacity' if question.hidden %>">
+    <%= render question %>
+  </div>
+<% end %>
