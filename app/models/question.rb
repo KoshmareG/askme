@@ -14,12 +14,8 @@ class Question < ApplicationRecord
 
   private
 
-  def hashtags_from_question_answer
-    [body, answer].join(' ').scan(HASH_TAG_REGEXP).map(&:downcase).uniq
-  end
-
   def create_hash_tags
-    hashtags_from_question_answer.each do |word|
+    (body + answer.to_s).scan(HASH_TAG_REGEXP).map(&:downcase).uniq.each do |word|
       hash_tag = HashTag.create_or_find_by(text: word)
 
       QuestionHashTag.create(question_id: self.id, hash_tag_id: hash_tag.id)
