@@ -7,7 +7,7 @@ class Question < ApplicationRecord
 
   validates :body, presence: true, length: { maximum: 280 }
 
-  after_commit :create_hash_tags, on: %i[create update]
+  after_save_commit :create_hash_tags
 
   private
 
