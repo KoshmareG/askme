@@ -6,11 +6,11 @@
     <% end %></p>
 </div>
 <div class="mb-sm">
-  <%= simple_format h(question.body) %>
+  <%= hashtag_parser(simple_format h(question.body)) %>
 </div>
 <% if question.answer.present? %>
   <div class="mb-sm text-dark-red">
-    <%= question.answer %>
+    <%= hashtag_parser(simple_format h(question.answer)) %>
   </div>
 <% end %>
 <% if question.hash_tags.present? %>

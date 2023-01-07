@@ -17,6 +17,6 @@ class Question < ApplicationRecord
         scan(HashTag::HASH_TAG_REGEXP).
         map(&:downcase).
         uniq.
-        map { |word| HashTag.create_or_find_by(text: word) }
+        map { |word| HashTag.create_or_find_by(text: word.delete('#')) }
   end
 end

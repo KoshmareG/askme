@@ -4,7 +4,12 @@ body {
 }
 
 a, button {
-  color: #DC2F02;
+  color: #941e00;
+  text-decoration: none;
+}
+
+.exit-link {
+  color: #eb5c38;
 }
 
 .title-lg {
@@ -36,7 +41,7 @@ a, button {
 }
 
 .text-dark-red {
-  color: #9D0208;
+  color: #520104;
 }
 
 .text-bold {
