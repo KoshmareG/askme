@@ -5,12 +5,13 @@
       от <%= link_to at_nickname(question.author), user_path(question.author.nickname) %>
     <% end %></p>
 </div>
+<% safe_list_sanitizer = Rails::Html::SafeListSanitizer.new %>
 <div class="mb-sm">
-  <%= hashtag_parser(simple_format h(question.body)) %>
+  <%= sanitize hashtag_parser(question.body), tags: %w(a) %>
 </div>
 <% if question.answer.present? %>
   <div class="mb-sm text-dark-red">
-    <%= hashtag_parser(simple_format h(question.answer)) %>
+    <%= sanitize hashtag_parser(question.answer), tags: %w(a) %>
   </div>
 <% end %>
 <% if question.hash_tags.present? %>
