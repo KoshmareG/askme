@@ -5,7 +5,6 @@
       от <%= link_to at_nickname(question.author), user_path(question.author.nickname) %>
     <% end %></p>
 </div>
-<% safe_list_sanitizer = Rails::Html::SafeListSanitizer.new %>
 <div class="mb-sm">
   <%= sanitize hashtag_parser(question.body), tags: %w(a) %>
 </div>
