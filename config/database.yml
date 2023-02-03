@@ -82,5 +82,5 @@ test:
 production:
   <<: *default
   database: askme_production
-  username: <%= Rails.application.credentials.dig(:database_username) %>
-  password: <%= Rails.application.credentials.dig(:database_password) %>
+  username: <%= Rails.application.credentials.database_username %>
+  password: <%= Rails.application.credentials.database_password %>
